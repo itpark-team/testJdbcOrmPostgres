@@ -13,6 +13,13 @@ public class User {
         this.countryId = countryId;
     }
 
+    public User(String name, int age, int countryId) {
+        this.id = 0;
+        this.name = name;
+        this.age = age;
+        this.countryId = countryId;
+    }
+
     public int getId() {
         return id;
     }

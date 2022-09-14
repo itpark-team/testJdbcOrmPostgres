@@ -22,4 +22,13 @@ public class Country {
     public int getPopulation() {
         return population;
     }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", population=" + population +
+                '}';
+    }
 }

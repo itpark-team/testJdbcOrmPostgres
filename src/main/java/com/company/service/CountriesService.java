@@ -1,15 +1,15 @@
 package com.company.service;
 
 import com.company.model.DbManager;
+import com.company.model.entities.Country;
 import com.company.model.entities.User;
 
 import java.util.List;
 
-public class UsersService {
-
+public class CountriesService {
     private DbManager dbManager;
 
-    public UsersService() throws Exception {
+    public CountriesService() throws Exception {
         try {
             dbManager = DbManager.getInstance();
         } catch (Exception e) {
@@ -17,17 +17,9 @@ public class UsersService {
         }
     }
 
-    public List<User> getAllUsers() throws Exception {
+    public List<Country> getAllCountries() throws Exception {
         try {
-            return dbManager.getTableUsers().getAllUsers();
-        } catch (Exception e) {
-            throw new Exception("Ошибка работы с базой данных: " + e.getMessage());
-        }
-    }
-
-    public void addNewUser(User user) throws Exception{
-        try {
-            dbManager.getTableUsers().addNewUser(user);
+            return dbManager.getTableCountries().getAllCountries();
         } catch (Exception e) {
             throw new Exception("Ошибка работы с базой данных: " + e.getMessage());
         }

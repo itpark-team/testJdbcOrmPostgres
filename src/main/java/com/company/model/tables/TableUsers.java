@@ -40,4 +40,15 @@ public class TableUsers {
 
         return users;
     }
+
+    public void addNewUser(User user) throws SQLException {
+        Statement statement = connection.createStatement();
+
+        String insertQuery = String.format("INSERT INTO users (name, country_id, age)\n" +
+                "VALUES ('%s',%d,%d)", user.getName(), user.getCountryId(), user.getAge());
+
+        statement.executeUpdate(insertQuery);
+
+        statement.close();
+    }
 }
