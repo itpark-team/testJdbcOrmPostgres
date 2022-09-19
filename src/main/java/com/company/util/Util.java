@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Util {
+
     public static int inputInt(String message, int min, int max) {
         boolean isValidInput;
         int output = 0;
