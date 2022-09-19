@@ -51,4 +51,45 @@ public class TableUsers {
 
         statement.close();
     }
+
+    public void deleteUser(int id) throws SQLException {
+        Statement statement = connection.createStatement();
+        String deleteQuery = String.format("DELETE FROM users WHERE id = %d", id);
+
+        statement.executeUpdate(deleteQuery);
+        statement.close();
+    }
+
+    public void updateUser(User user) throws SQLException {
+        Statement statement = connection.createStatement();
+        String updateQuery = String.format("UPDATE users set name='%s', age=%d, country_id=%d WHERE id = %d", user.getName(), user.getAge(), user.getCountryId(), user.getId());
+
+        statement.executeUpdate(updateQuery);
+        statement.close();
+    }
+
+    public User getUser(int searchId) throws SQLException {
+        User user = null;
+
+        Statement statement = connection.createStatement();
+
+        String selectQuery = String.format("SELECT * FROM users WHERE id = %d", searchId);
+
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+
+        resultSet.next();
+
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        int age = resultSet.getInt("age");
+        int countryId = resultSet.getInt("country_id");
+
+        user = new User(id, name, age, countryId);
+
+        resultSet.close();
+
+        statement.close();
+
+        return user;
+    }
 }

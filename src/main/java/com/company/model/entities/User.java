@@ -5,12 +5,14 @@ public class User {
     private String name;
     private int age;
     private int countryId;
+    private Country country;
 
     public User(int id, String name, int age, int countryId) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.countryId = countryId;
+        this.country = null;
     }
 
     public User(String name, int age, int countryId) {
@@ -18,6 +20,7 @@ public class User {
         this.name = name;
         this.age = age;
         this.countryId = countryId;
+        this.country = null;
     }
 
     public int getId() {
@@ -36,6 +39,14 @@ public class User {
         return countryId;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -43,6 +54,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", countryId=" + countryId +
+                ", country=" + country +
                 '}';
     }
 }

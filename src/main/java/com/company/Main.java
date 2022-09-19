@@ -30,10 +30,12 @@ public class Main {
 
             System.out.println("1.Вывести всех пользователей");
             System.out.println("2.Добавить нового пользователя");
+            System.out.println("3.Обновить пользователя по ИД");
+            System.out.println("4.Удалить пользователя по ИД");
 
             System.out.println("0.Выход");
 
-            action = Util.inputInt("Введите пункт меню: ", 0, 2);
+            action = Util.inputInt("Введите пункт меню: ", 0, 4);
 
             switch (action) {
                 case 1: {
@@ -63,6 +65,55 @@ public class Main {
                         usersService.addNewUser(new User(name, age, countryId));
 
                         System.out.println("Пользователь успешно добавлен");
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                break;
+
+                case 3: {
+                    try {
+                        List<User> users = usersService.getAllUsers();
+                        users.forEach(System.out::println);
+
+                        List<Integer> usersIds = users.stream().map(User::getId).collect(Collectors.toList());
+                        int id = Util.inputInt("Введите id пользователя для обновления: ", usersIds);
+
+                        String name = Util.inputString("Введите имя: ", 30);
+                        int age = Util.inputInt("Введите возраст: ", 0, 150);
+
+                        System.out.println("Список доступных стран");
+
+                        List<Country> countries = countriesService.getAllCountries();
+                        countries.forEach(System.out::println);
+
+                        List<Integer> countriesIds = countries.stream().map(Country::getId).collect(Collectors.toList());
+
+                        int countryId = Util.inputInt("Введите id выбранной Вами страны: ", countriesIds);
+
+                        usersService.updateUser(new User(id, name, age, countryId));
+
+                        System.out.println("Пользователь успешно обновлён");
+
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                break;
+
+                case 4: {
+                    try {
+                        List<User> users = usersService.getAllUsers();
+                        users.forEach(System.out::println);
+
+                        List<Integer> usersIds = users.stream().map(User::getId).collect(Collectors.toList());
+                        int id = Util.inputInt("Введите id пользователя для удаления: ", usersIds);
+
+                        usersService.deleteUser(id);
+
+                        System.out.println("Пользователь успешно удален");
 
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
