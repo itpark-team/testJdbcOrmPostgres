@@ -1,13 +1,18 @@
 package com.company.model;
 
+import com.company.Main;
 import com.company.model.connection.DbConnection;
 import com.company.model.tables.TableCountries;
 import com.company.model.tables.TableUsers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DbManager {
+    private static Logger logger = LoggerFactory.getLogger(DbManager.class);
+
     private TableUsers tableUsers;
     private TableCountries tableCountries;
 
@@ -16,6 +21,8 @@ public class DbManager {
 
         tableUsers = new TableUsers(connection);
         tableCountries = new TableCountries(connection);
+
+        logger.info("connection, tableUsers, tableCountries initialized");
     }
 
     public TableUsers getTableUsers() {

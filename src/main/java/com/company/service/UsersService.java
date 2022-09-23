@@ -3,10 +3,14 @@ package com.company.service;
 import com.company.model.DbManager;
 import com.company.model.entities.Country;
 import com.company.model.entities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class UsersService {
+
+    private static Logger logger = LoggerFactory.getLogger(UsersService.class);
 
     private DbManager dbManager;
 
@@ -27,10 +31,17 @@ public class UsersService {
                     user -> user.setCountry(countries.stream().filter(country -> country.getId() == user.getCountryId()).findFirst().get())
             );
 
+            logger.info("get all users correct");
+
             return users;
 
         } catch (Exception e) {
-            throw new Exception("Ошибка получения пользователей из БД: " + e.getMessage());
+
+            String errorMessage = "Ошибка получения пользователей из БД: " + e.getMessage();
+
+            logger.error("get all users correct with error: {}",errorMessage);
+
+            throw new Exception(errorMessage);
         }
     }
 

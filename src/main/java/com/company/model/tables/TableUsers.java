@@ -1,6 +1,9 @@
 package com.company.model.tables;
 
 import com.company.model.entities.User;
+import com.company.service.UsersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableUsers {
+
+    private static Logger logger = LoggerFactory.getLogger(TableUsers.class);
+
     private Connection connection;
 
     public TableUsers(Connection connection) {
@@ -17,6 +23,7 @@ public class TableUsers {
     }
 
     public List<User> getAllUsers() throws SQLException {
+
         List<User> users = new ArrayList<>();
 
         Statement statement = connection.createStatement();
@@ -24,6 +31,8 @@ public class TableUsers {
         String selectQuery = String.format("SELECT * FROM users ORDER BY id ASC");
 
         ResultSet resultSet = statement.executeQuery(selectQuery);
+
+        logger.debug("select users from table");
 
         while (resultSet.next()) {
 
@@ -34,9 +43,14 @@ public class TableUsers {
 
             users.add(new User(id, name, age, countryId));
         }
+
+        logger.debug("all users add to List<User>");
+
         resultSet.close();
 
         statement.close();
+
+        logger.debug("resultSet.close and statement.close");
 
         return users;
     }
